@@ -1,5 +1,3 @@
-# Premium
-
 # Perintah
     pkg update && upgrade
     pkg install git python
